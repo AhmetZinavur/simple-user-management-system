@@ -34,6 +34,7 @@ public class User {
     @NotBlank(message = "Email is mandotary")
     @Email(message = "Enter a valid e-mail address")
     private String email;
+    @NotBlank(message = "Role must be USER or ADMIN")
     @Enumerated(EnumType.STRING)
     private Role role;
 }
