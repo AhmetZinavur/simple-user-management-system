@@ -2,8 +2,11 @@ package com.example.simple_user_management_system.controller;
 
 import com.example.simple_user_management_system.entity.User;
 import com.example.simple_user_management_system.service.UserService;
+import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,8 +24,11 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("create-user")
-    public User create(@RequestBody User user) {
-        return userService.create(user);
+    public ResponseEntity<?> create(@Valid @RequestBody User user, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().body(bindingResult.getFieldError());
+        }
+        return ResponseEntity.ok(userService.create(user));
     }
 
     @GetMapping("users")
