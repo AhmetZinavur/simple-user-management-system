@@ -17,7 +17,7 @@
 
 **Used Technologies**
 
-- **Java:** For API development.
+- **Java-21:** For API development.
     
 - **Spring** **Boot:** Framework.
     
